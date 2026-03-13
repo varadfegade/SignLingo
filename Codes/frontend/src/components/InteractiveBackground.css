@@ -1,0 +1,158 @@
+/* =====================================================================
+   SHARED BASE
+   ===================================================================== */
+.bg-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* =====================================================================
+   DASHBOARD VARIANT — warm beige + scrolling strips
+   ===================================================================== */
+.bg-dashboard {
+  background: var(--bg-main); /* #F5F5DC warm beige */
+}
+
+/* Subtle orange grid texture */
+.bg-mesh {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(237, 125, 58, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(237, 125, 58, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+}
+
+/* ── Strip wrapper ────────────────────────────────────────────────────── */
+.strips-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5vh 0;          /* keeps strips away from very top/bottom edge */
+  z-index: 1;
+}
+
+/* ── Single strip track ───────────────────────────────────────────────── */
+/* Wider strips as requested — ~100px ≈ 2.6 cm on 96dpi */
+.strip-track {
+  width: 100%;
+  height: 100px;           /* wider than before */
+  overflow: hidden;
+  position: relative;
+}
+
+.strip-orange {
+  background: linear-gradient(
+    90deg,
+    rgba(237, 125, 58, 0.10) 0%,
+    rgba(237, 125, 58, 0.20) 50%,
+    rgba(237, 125, 58, 0.10) 100%
+  );
+  border-top:    1px solid rgba(237, 125, 58, 0.22);
+  border-bottom: 1px solid rgba(237, 125, 58, 0.22);
+}
+
+.strip-green {
+  background: linear-gradient(
+    90deg,
+    rgba(77, 144, 120, 0.10) 0%,
+    rgba(77, 144, 120, 0.20) 50%,
+    rgba(77, 144, 120, 0.10) 100%
+  );
+  border-top:    1px solid rgba(77, 144, 120, 0.22);
+  border-bottom: 1px solid rgba(77, 144, 120, 0.22);
+}
+
+/* ── Scrolling inner row ─────────────────────────────────────────────── */
+.strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 2.8rem;
+  padding: 0 2rem;
+  height: 100%;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* Left → Right */
+.scroll-ltr {
+  animation: scrollLTR 30s linear infinite;
+}
+/* Right → Left */
+.scroll-rtl {
+  animation: scrollRTL 30s linear infinite;
+}
+
+/* Per-strip speed variation for organic feel */
+.strip-track:nth-child(1) .strip-inner { animation-duration: 26s; }
+.strip-track:nth-child(2) .strip-inner { animation-duration: 33s; }
+.strip-track:nth-child(3) .strip-inner { animation-duration: 20s; }
+.strip-track:nth-child(4) .strip-inner { animation-duration: 38s; }
+
+@keyframes scrollLTR {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+@keyframes scrollRTL {
+  0%   { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+/* ── Emoji symbols ───────────────────────────────────────────────────── */
+.gesture-symbol {
+  font-size: 2.2rem;      /* larger emoji to fill the wider strip */
+  opacity: 0.60;
+  display: inline-block;
+  flex-shrink: 0;
+  user-select: none;
+  line-height: 1;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.10));
+  transition: opacity 0.3s;
+}
+
+/* ── Ambient glow blobs ──────────────────────────────────────────────── */
+.ambient-cast {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(130px);
+  z-index: -1;
+  opacity: 0.30;
+}
+.cast-top {
+  top: -20vh; right: -10vw;
+  width: 55vw; height: 55vh;
+  background: rgba(237, 125, 58, 0.30);
+}
+.cast-bottom {
+  bottom: -20vh; left: -10vw;
+  width: 55vw; height: 55vh;
+  background: rgba(77, 144, 120, 0.25);
+}
+
+/* =====================================================================
+   DEFAULT VARIANT — warm gradient blend for all other pages
+   Uses all three palette colours: Beige · Orange · Green
+   ===================================================================== */
+.bg-default {
+  /*
+    A soft, professional 3-colour diagonal gradient mixing:
+      #F5F5DC  (Warm Beige)
+      #ED7D3A  (Orange)
+      #4D9078  (Green)
+    The gradient is quite subtle so text remains legible.
+  */
+  background:
+    radial-gradient(ellipse at 0% 0%,   rgba(237, 125, 58, 0.35) 0%,   transparent 55%),
+    radial-gradient(ellipse at 100% 0%,  rgba(77,  144, 120, 0.25) 0%,   transparent 55%),
+    radial-gradient(ellipse at 50%  100%, rgba(237, 125, 58, 0.20) 0%,   transparent 60%),
+    linear-gradient(160deg, #F5F5DC 0%, #EDE9D4 50%, #E8EDE8 100%);
+}

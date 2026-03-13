@@ -1,0 +1,191 @@
+/* Vertical Sidebar Layout */
+.sidebar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    background: var(--bg-panel);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-right: var(--border-light);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    z-index: 100;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.02);
+    transition: var(--transition-bounce);
+}
+
+.sidebar-header {
+    margin-bottom: 3rem;
+    padding: 0 0.5rem;
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--text-main);
+}
+
+.logo-icon-wrapper {
+    background: var(--gradient-premium);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px var(--primary-glow);
+}
+
+.logo-icon {
+    color: #ffffff;
+}
+
+.logo-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Background slide effect for hover/active */
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 64, 175, 0.05); /* very subtle primary */
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+    border-radius: var(--radius-md);
+}
+
+.nav-item-icon {
+    transition: var(--transition-fast);
+}
+
+.nav-item:hover, .nav-item.active {
+    color: var(--primary-accent);
+}
+
+.nav-item:hover::before, .nav-item.active::before {
+    transform: translateX(0);
+}
+
+.nav-item:hover .nav-item-icon {
+    transform: scale(1.1);
+}
+
+/* Sharp left border indicator for active page */
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 60%;
+    width: 4px;
+    background: var(--primary-accent);
+    border-radius: 0 4px 4px 0;
+    box-shadow: 2px 0 8px var(--primary-glow);
+    animation: slideInBar 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideInBar {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 2rem;
+    border-top: var(--border-light);
+}
+
+.btn-logout {
+    background: rgba(255, 126, 103, 0.1);
+    color: var(--coral-accent);
+    border: none;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition-snap);
+}
+
+.btn-logout:hover {
+    background: var(--coral-accent);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(255, 126, 103, 0.3);
+}
+
+.mobile-menu-btn {
+    display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        border-right: none;
+        border-bottom: var(--border-light);
+    }
+
+    .sidebar-header {
+        margin-bottom: 0;
+    }
+
+    .sidebar-menu, .sidebar-footer {
+        display: none; /* Can be handled with a state toggle for mobile later */
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--text-main);
+        cursor: pointer;
+    }
+}

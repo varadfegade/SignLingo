@@ -1,0 +1,75 @@
+.magnetic-wrapper {
+    position: relative;
+    border-radius: var(--radius-pill);
+    padding: 1.25rem 2.5rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.1s linear, box-shadow 0.4s var(--ease-spring), background-color 0.4s var(--ease-smooth);
+    will-change: transform;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+/* Spring back to original position when leave */
+.magnetic-wrapper:not(:hover) {
+    transition: transform 0.6s var(--ease-spring), box-shadow 0.4s var(--ease-spring), background-color 0.4s var(--ease-smooth) !important;
+}
+
+.magnetic-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    pointer-events: none;
+    transition: transform 0.1s linear;
+    will-change: transform;
+    position: relative;
+    z-index: 2;
+}
+
+.magnetic-wrapper:not(:hover) .magnetic-text {
+    transition: transform 0.6s var(--ease-spring) !important;
+}
+
+.mag-primary {
+    background: var(--text-main);
+    color: var(--text-invert);
+    box-shadow: var(--shadow-bento);
+}
+
+.mag-primary:hover {
+    background: var(--accent-terracotta);
+    box-shadow: 0 12px 32px rgba(224, 82, 54, 0.3);
+}
+
+.mag-secondary {
+    background: var(--bg-panel);
+    color: var(--text-main);
+    border: var(--border-soft);
+    box-shadow: var(--shadow-bento);
+}
+
+.mag-secondary:hover {
+    box-shadow: var(--shadow-bento-hover);
+    color: var(--accent-terracotta);
+}
+
+.hover-halo {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-pill);
+    background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    animation: fadeInHalo 0.4s ease forwards;
+}
+
+@keyframes fadeInHalo {
+    to { opacity: 1; }
+}
