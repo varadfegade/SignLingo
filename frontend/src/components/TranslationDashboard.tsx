@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Sparkles, Camera, Activity, Video, HardDrive, Terminal, StopCircle, RefreshCw, Layers } from 'lucide-react';
 
 export default function TranslationDashboard() {
